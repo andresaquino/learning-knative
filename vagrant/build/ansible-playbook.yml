@@ -1,0 +1,41 @@
+---
+- hosts: "{{ variable_host | default('all') }}"
+  connection: local
+  tasks:
+
+  - name: Install Docker
+    become: true
+    become_method: sudo
+    script: installers/docker.sh
+
+  - name: Install Python3
+    become: true
+    become_method: sudo
+    script: installers/python3.sh
+
+  - name: Install Go
+    become: true
+    become_method: sudo
+    script: installers/go.sh
+
+  - name: Install Hey
+    script: installers/hey.sh
+
+  - name: Install SOS Notebook
+    script: installers/sos-notebook/sos-notebook.sh
+
+  - name: Install SystemD SOS Notebook
+    become: true
+    become_method: sudo
+    script: installers/sos-notebook/systemd-sos-notebook.sh
+
+  - name: Install MiniKube
+    become: true
+    become_method: sudo
+    script: installers/minikube.sh
+    ignore_errors: yes
+
+  - name: Install kubectl
+    become: true
+    become_method: sudo
+    script: installers/kubectl.sh

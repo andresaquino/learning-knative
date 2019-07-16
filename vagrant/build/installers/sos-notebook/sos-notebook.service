@@ -1,0 +1,15 @@
+[Unit]
+Description=SOS Notebook
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=vagrant
+WorkingDirectory=/home/workspace
+ExecStart=/bin/bash -c "/home/vagrant/.local/bin/jupyter notebook --NotebookApp.token='' --ip='0.0.0.0'"
+
+[Install]
+WantedBy=multi-user.target
